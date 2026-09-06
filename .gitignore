@@ -46,3 +46,8 @@ venv.bak/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Internal Documentation / Context Handover
+HANDOVER.md
+*handover*.md
+ai_context.md
