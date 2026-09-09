@@ -10,6 +10,7 @@ Desain dan alur UX diadaptasi 1:1 dari prototipe klinis (diabetes-risk-prototype
 
 from pathlib import Path
 import streamlit as st
+from streamlit_extras.stylable_container import stylable_container
 import pandas as pd
 from utils.preprocessing import preprocess_input, load_artifacts, calculate_map
 
@@ -59,7 +60,7 @@ if "form_data" not in st.session_state:
     st.session_state.form_data = {
         "gender": "Perempuan",
         "usia": 34,
-        "ras": "Non-Hispanic White",
+        "ras": "Asia (termasuk Indonesia & Asia Tenggara)",
         "rw_kol": "Tidak",
         "rw_liv": "Tidak",
         "rw_tir": "Tidak",
@@ -163,7 +164,7 @@ if st.session_state.step == "landing":
         col_ps1, col_ps2 = st.columns(2)
         if col_ps1.button("🟢 Profil Sehat / Rendah", use_container_width=True):
             st.session_state.form_data.update({
-                "gender": "Perempuan", "usia": 28, "ras": "Non-Hispanic White",
+                "gender": "Perempuan", "usia": 28, "ras": "Asia (termasuk Indonesia & Asia Tenggara)",
                 "rw_kol": "Tidak", "rw_liv": "Tidak", "rw_tir": "Tidak", "rw_kan": "Tidak",
                 "sistolik": 115, "diastolik": 75, "bmi": 21.8, "hba1c": 5.0, "kolesterol": 170.0,
                 "depresi": "Tidak pernah", "tidur": "Cukup & teratur", "makan": "Teratur & seimbang",
@@ -172,11 +173,11 @@ if st.session_state.step == "landing":
             go_to("result")
         if col_ps2.button("🔴 Profil Risiko Tinggi", use_container_width=True):
             st.session_state.form_data.update({
-                "gender": "Laki-laki", "usia": 56, "ras": "Other Hispanic",
+                "gender": "Laki-laki", "usia": 56, "ras": "Hispanik / Latino",
                 "rw_kol": "Ya", "rw_liv": "Tidak", "rw_tir": "Ya", "rw_kan": "Tidak",
                 "sistolik": 145, "diastolik": 92, "bmi": 32.5, "hba1c": 7.4, "kolesterol": 238.0,
-                "depresi": "Sering", "tidur": "Sering kurang tidur", "makan": "Sering berlebihan/kurang",
-                "alkohol": "Rutin", "rokok": "Perokok aktif"
+                "depresi": "Sering", "tidur": "Hampir setiap hari terganggu", "makan": "Hampir setiap hari bermasalah",
+                "alkohol": "Hampir setiap hari", "rokok": "Perokok aktif"
             })
             go_to("result")
 
@@ -195,7 +196,7 @@ elif st.session_state.step == "form1":
     </div>
     """, unsafe_allow_html=True)
 
-    with st.container():
+    with st.container(border=True):
         st.markdown("**Jenis Kelamin**")
         gender_choice = st.pills(
             "Jenis Kelamin",
@@ -215,15 +216,15 @@ elif st.session_state.step == "form1":
         st.session_state.form_data["usia"] = usia_input
 
         ras_list = [
-            "Asian (Non-Hispanic)",
-            "Non-Hispanic White",
-            "Non-Hispanic Black",
+            "Asia (termasuk Indonesia & Asia Tenggara)",
+            "Kaukasia / Kulit Putih",
+            "Afrika / Kulit Hitam",
+            "Hispanik / Latino",
             "Mexican American",
-            "Other Hispanic",
-            "Lainnya / Campuran"
+            "Lainnya / Etnis Campuran"
         ]
-        cur_ras = st.session_state.form_data.get("ras", "Non-Hispanic White")
-        ras_idx = ras_list.index(cur_ras) if cur_ras in ras_list else 1
+        cur_ras = st.session_state.form_data.get("ras", "Asia (termasuk Indonesia & Asia Tenggara)")
+        ras_idx = ras_list.index(cur_ras) if cur_ras in ras_list else 0
         ras_choice = st.selectbox("Ras / etnisitas", options=ras_list, index=ras_idx)
         st.session_state.form_data["ras"] = ras_choice
 
@@ -285,7 +286,7 @@ elif st.session_state.step == "form2":
     </div>
     """, unsafe_allow_html=True)
 
-    with st.container():
+    with st.container(border=True):
         st.markdown("**Tekanan darah (mmHg)**")
         bp1, bp2 = st.columns(2)
         with bp1:
@@ -347,7 +348,7 @@ elif st.session_state.step == "form3":
     </div>
     """, unsafe_allow_html=True)
 
-    with st.container():
+    with st.container(border=True):
         st.markdown("**Seberapa sering merasa sedih, tertekan, atau putus asa dalam 2 minggu terakhir?**")
         scale_opts = ["Tidak pernah", "Kadang", "Sering", "Hampir selalu"]
         dep_val = st.segmented_control(
@@ -360,7 +361,12 @@ elif st.session_state.step == "form3":
 
         st.write("")
         st.markdown("**Bagaimana pola tidur Anda belakangan ini?**")
-        tidur_opts = ["Cukup & teratur", "Kadang terganggu", "Sering kurang tidur"]
+        tidur_opts = [
+            "Cukup & teratur",
+            "Kadang terganggu",
+            "Sering kurang tidur",
+            "Hampir setiap hari terganggu"
+        ]
         tidur_val = st.pills(
             "Pola Tidur",
             options=tidur_opts,
@@ -371,7 +377,12 @@ elif st.session_state.step == "form3":
 
         st.write("")
         st.markdown("**Bagaimana pola makan Anda belakangan ini?**")
-        makan_opts = ["Teratur & seimbang", "Tidak teratur", "Sering berlebihan/kurang"]
+        makan_opts = [
+            "Teratur & seimbang",
+            "Kadang tidak teratur",
+            "Sering berlebihan/kurang",
+            "Hampir setiap hari bermasalah"
+        ]
         makan_val = st.pills(
             "Pola Makan",
             options=makan_opts,
@@ -404,9 +415,15 @@ elif st.session_state.step == "form4":
     </div>
     """, unsafe_allow_html=True)
 
-    with st.container():
-        st.markdown("**Konsumsi alkohol**")
-        alk_opts = ["Tidak pernah", "Jarang", "Rutin"]
+    with st.container(border=True):
+        st.markdown("**Konsumsi minuman beralkohol**")
+        alk_opts = [
+            "Tidak pernah",
+            "Jarang (beberapa kali setahun)",
+            "Bulanan (1-3 kali sebulan)",
+            "Mingguan (1-4 kali seminggu)",
+            "Hampir setiap hari"
+        ]
         alk_val = st.pills(
             "Alkohol",
             options=alk_opts,
@@ -447,13 +464,13 @@ elif st.session_state.step == "result":
 
     ras_map = {
         "Mexican American": 1,
-        "Other Hispanic": 2,
-        "Non-Hispanic White": 3,
-        "Non-Hispanic Black": 4,
-        "Asian (Non-Hispanic)": 6,
-        "Lainnya / Campuran": 7
+        "Hispanik / Latino": 2,
+        "Kaukasia / Kulit Putih": 3,
+        "Afrika / Kulit Hitam": 4,
+        "Asia (termasuk Indonesia & Asia Tenggara)": 6,
+        "Lainnya / Etnis Campuran": 7
     }
-    ras_code = ras_map.get(fd["ras"], 3)
+    ras_code = ras_map.get(fd["ras"], 6)
 
     rw_kol_code = 1 if fd["rw_kol"] == "Ya" else 0
     rw_liv_code = 1 if fd["rw_liv"] == "Ya" else 0
@@ -463,14 +480,35 @@ elif st.session_state.step == "result":
     depresi_map = {"Tidak pernah": 0, "Kadang": 1, "Sering": 2, "Hampir selalu": 3}
     depresi_code = depresi_map.get(fd["depresi"], 0)
 
-    tidur_map = {"Cukup & teratur": 0, "Kadang terganggu": 1, "Sering kurang tidur": 2}
+    tidur_map = {
+        "Cukup & teratur": 0,
+        "Kadang terganggu": 1,
+        "Sering kurang tidur": 2,
+        "Hampir setiap hari terganggu": 3
+    }
     tidur_code = tidur_map.get(fd["tidur"], 0)
 
-    makan_map = {"Teratur & seimbang": 0, "Tidak teratur": 1, "Sering berlebihan/kurang": 2}
+    makan_map = {
+        "Teratur & seimbang": 0,
+        "Kadang tidak teratur": 1,
+        "Sering berlebihan/kurang": 2,
+        "Hampir setiap hari bermasalah": 3
+    }
     makan_code = makan_map.get(fd["makan"], 0)
 
-    # 0: tidak pernah, jarang (kode NHANES 9), rutin (kode NHANES 5)
-    alkohol_map = {"Tidak pernah": 0, "Jarang": 9, "Rutin": 5}
+    # Pemetaan ke kode mentah NHANES untuk alkohol:
+    # 0 -> mapped: 0 (tidak pernah)
+    # 9 -> mapped: 2 (jarang / beberapa kali setahun)
+    # 7 -> mapped: 4 (bulanan / 1-3x sebulan)
+    # 5 -> mapped: 6 (mingguan / 1-4x seminggu)
+    # 1 -> mapped: 10 (hampir setiap hari / harian)
+    alkohol_map = {
+        "Tidak pernah": 0,
+        "Jarang (beberapa kali setahun)": 9,
+        "Bulanan (1-3 kali sebulan)": 7,
+        "Mingguan (1-4 kali seminggu)": 5,
+        "Hampir setiap hari": 1
+    }
     alkohol_code = alkohol_map.get(fd["alkohol"], 0)
 
     # Merokok minimal 100 batang seumur hidup (mantan/aktif = 1)
@@ -584,10 +622,14 @@ elif st.session_state.step == "result":
         bp_cls, bp_lvl, bp_pct = "ok", f"Normal ({sis_v}/{dia_v} mmHg)", 20
 
     # Pola Tidur & Keseharian
-    if fd["tidur"] == "Sering kurang tidur":
-        tidur_cls, tidur_lvl, tidur_pct = "mid", "Kurang teratur", 55
+    if fd["tidur"] == "Hampir setiap hari terganggu":
+        tidur_cls, tidur_lvl, tidur_pct = "high", "Sangat terganggu (Harian)", 85
+    elif fd["tidur"] == "Sering kurang tidur":
+        tidur_cls, tidur_lvl, tidur_pct = "mid", "Sering terganggu", 60
+    elif fd["tidur"] == "Kadang terganggu":
+        tidur_cls, tidur_lvl, tidur_pct = "mid", "Kadang terganggu", 35
     else:
-        tidur_cls, tidur_lvl, tidur_pct = "ok", "Cukup baik", 25
+        tidur_cls, tidur_lvl, tidur_pct = "ok", "Cukup & teratur", 20
 
     st.markdown(f"""
     <div class="factors-card">
