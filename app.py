@@ -124,7 +124,7 @@ if st.session_state.step == "landing":
     st.markdown("""
     <div class="hero-card">
       <div class="hero-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3E8E7E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#3E8E7E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
         </svg>
       </div>
@@ -139,13 +139,13 @@ if st.session_state.step == "landing":
     st.markdown("""
     <div class="trust-row">
       <div class="trust-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64798A" stroke-width="2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64798A" stroke-width="2">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         </svg>
         Data tidak disimpan
       </div>
       <div class="trust-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64798A" stroke-width="2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64798A" stroke-width="2">
           <circle cx="12" cy="12" r="10"/>
           <path d="M12 6v6l4 2"/>
         </svg>
@@ -570,7 +570,7 @@ elif st.session_state.step == "result":
     # 2. Dual-Model Estimation Card
     st.markdown(f"""
     <div class="dual-model-card">
-      <div style="font-size: 13px; font-weight: 600; color: #1D4E6B; margin-bottom: 10px;">
+      <div style="font-size: 16px; font-weight: 700; color: #1D4E6B; margin-bottom: 14px; letter-spacing: 0.3px;">
         ESTIMASI PROBABILITAS (DUAL-MODEL AI)
       </div>
       <div class="dual-model-box">
@@ -585,7 +585,7 @@ elif st.session_state.step == "result":
           <div class="mini-model-prob">{xgb_prob:.1%}</div>
         </div>
       </div>
-      <div style="font-size: 12px; color: #64798A; line-height: 1.45;">
+      <div style="font-size: 14.5px; color: #52667A; line-height: 1.6;">
         <b>Catatan:</b> Random Forest difokuskan untuk menangkap risiko secara sensitif (meminimalkan risiko yang terlewat), sedangkan XGBoost memberikan kepastian pola diagnosis yang seimbang.
       </div>
     </div>
@@ -661,7 +661,7 @@ elif st.session_state.step == "result":
       <h3>Yang bisa Anda lakukan</h3>
       <div class="reco-item">
         <div class="reco-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3E8E7E" stroke-width="2">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A7E6F" stroke-width="2">
             <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
           </svg>
         </div>
@@ -672,7 +672,7 @@ elif st.session_state.step == "result":
       </div>
       <div class="reco-item">
         <div class="reco-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3E8E7E" stroke-width="2">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A7E6F" stroke-width="2">
             <circle cx="12" cy="12" r="9"/>
             <path d="M12 7v5l3 3"/>
           </svg>
@@ -684,7 +684,7 @@ elif st.session_state.step == "result":
       </div>
       <div class="reco-item">
         <div class="reco-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3E8E7E" stroke-width="2">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A7E6F" stroke-width="2">
             <path d="M12 3a6 6 0 00-6 6c0 4 3 5 3 9h6c0-4 3-5 3-9a6 6 0 00-6-6z"/>
           </svg>
         </div>
