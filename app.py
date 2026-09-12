@@ -86,8 +86,8 @@ def render_topbar():
     <div class="topbar">
       <div class="mark">+</div>
       <div>
-        <div class="name">Cek Diabetes</div>
-        <div class="tagline">Skrining risiko mandiri</div>
+        <div class="name">Cek Diabetes Mandiri</div>
+        <div class="tagline">Skrining Cerdas & Deteksi Dini Berbasis Dua Model AI</div>
       </div>
     </div>
     """, unsafe_allow_html=True)
@@ -124,45 +124,51 @@ if st.session_state.step == "landing":
     st.markdown("""
     <div class="hero-card">
       <div class="hero-icon">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#3E8E7E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#236B5E" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
           <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
         </svg>
       </div>
-      <h1>Cek risiko diabetes Anda dalam 2 menit</h1>
-      <p>Jawab beberapa pertanyaan tentang kondisi tubuh, kebiasaan, dan keseharian Anda. Kami bantu memberi gambaran awal risiko diabetes secara pribadi dan mudah dipahami.</p>
+      <h1>Ketahui Potensi Risiko Diabetes Anda dalam 2 Menit</h1>
+      <p>Pemeriksaan skrining mandiri yang memadukan parameter klinis, rekam medis, dan pola hidup Anda. Didukung arsitektur Dual-Model AI (Random Forest & XGBoost) untuk evaluasi risiko yang akurat, transparan, dan mudah dipahami.</p>
     </div>
     """, unsafe_allow_html=True)
 
-    if st.button("Mulai pemeriksaan", type="primary", use_container_width=True):
+    if st.button("Mulai Pemeriksaan Sekarang →", type="primary", use_container_width=True):
         go_to("form1")
 
     st.markdown("""
     <div class="trust-row">
       <div class="trust-item">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64798A" stroke-width="2">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         </svg>
-        Data tidak disimpan
+        Privasi Aman (Data Tidak Disimpan)
       </div>
       <div class="trust-item">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64798A" stroke-width="2">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2">
           <circle cx="12" cy="12" r="10"/>
           <path d="M12 6v6l4 2"/>
         </svg>
-        Hasil instan
+        Analisis Hasil Instan
+      </div>
+      <div class="trust-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Model Standar Klinis NHANES
       </div>
     </div>
     <div class="disclaimer-box">
-      <span>ⓘ</span>
-      <span>Hasil pemeriksaan ini adalah gambaran risiko awal, bukan diagnosis medis. Untuk kepastian, konsultasikan dengan tenaga kesehatan.</span>
+      <span style="font-size: 22px; line-height: 1;">ⓘ</span>
+      <span><b>Perhatian Medis:</b> Alat ini berfungsi sebagai media skrining risiko mandiri, bukan diagnosis klinis pengganti dokter. Konsultasikan dengan fasilitas layanan kesehatan untuk penegakan diagnosis definitif.</span>
     </div>
     """, unsafe_allow_html=True)
 
     # Preset Shortcut untuk Pengujian Cepat
     st.write("")
-    with st.expander("⚡ Coba Contoh Data Cepat (Testing Preset)"):
+    with st.expander("⚡ Uji Coba Cepat (Pilih Contoh Kasus Klinis)"):
         col_ps1, col_ps2 = st.columns(2)
-        if col_ps1.button("🟢 Profil Sehat / Rendah", use_container_width=True):
+        if col_ps1.button("🟢 Profil Sehat / Risiko Rendah", use_container_width=True):
             st.session_state.form_data.update({
                 "gender": "Perempuan", "usia": 28, "ras": "Asia (termasuk Indonesia & Asia Tenggara)",
                 "rw_kol": "Tidak", "rw_liv": "Tidak", "rw_tir": "Tidak", "rw_kan": "Tidak",
@@ -186,13 +192,13 @@ if st.session_state.step == "landing":
 # SCREEN 2: FORM 1 - DEMOGRAFIS & RIWAYAT MEDIS
 # =========================================================
 elif st.session_state.step == "form1":
-    render_progress(1, "Demografis")
+    render_progress(1, "Data Demografis & Riwayat")
 
     st.markdown("""
     <div class="form-card">
-      <div class="section-eyebrow">Tentang Anda</div>
-      <h2>Data Demografis</h2>
-      <p class="section-desc">Informasi dasar ini membantu menyesuaikan hasil pemeriksaan dengan profil Anda.</p>
+      <div class="section-eyebrow">Langkah 1 dari 4</div>
+      <h2>Profil Demografis & Riwayat Medis</h2>
+      <p class="section-desc">Informasi latar belakang ini digunakan model untuk mengalibrasi baseline risiko berdasarkan kelompok populasi yang sesuai.</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -276,13 +282,13 @@ elif st.session_state.step == "form1":
 # SCREEN 3: FORM 2 - PEMERIKSAAN MEDIS
 # =========================================================
 elif st.session_state.step == "form2":
-    render_progress(2, "Pemeriksaan Medis")
+    render_progress(2, "Parameter Klinis & Laboratorium")
 
     st.markdown("""
     <div class="form-card">
-      <div class="section-eyebrow">Angka dari Pemeriksaan</div>
-      <h2>Data Medis</h2>
-      <p class="section-desc">Gunakan hasil pemeriksaan terakhir Anda. Perkiraan juga tidak masalah.</p>
+      <div class="section-eyebrow">Langkah 2 dari 4</div>
+      <h2>Parameter Klinis & Laboratorium</h2>
+      <p class="section-desc">Masukkan data hasil cek kesehatan terakhir Anda. Jika belum pernah tes laboratorium, gunakan nilai estimasi terdekat.</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -338,13 +344,13 @@ elif st.session_state.step == "form2":
 # SCREEN 4: FORM 3 - KESEHATAN MENTAL
 # =========================================================
 elif st.session_state.step == "form3":
-    render_progress(3, "Kesehatan Mental")
+    render_progress(3, "Kesehatan Mental & Kesejahteraan")
 
     st.markdown("""
     <div class="form-card">
-      <div class="section-eyebrow">Keseharian Anda</div>
-      <h2>Kesehatan Mental</h2>
-      <p class="section-desc">Kondisi mental turut memengaruhi risiko kesehatan tubuh secara keseluruhan.</p>
+      <div class="section-eyebrow">Langkah 3 dari 4</div>
+      <h2>Kesehatan Mental & Kualitas Istirahat</h2>
+      <p class="section-desc">Kadar stres, gangguan suasana hati, serta kualitas tidur memiliki korelasi metabolik yang kuat terhadap resistensi insulin.</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -405,13 +411,13 @@ elif st.session_state.step == "form3":
 # SCREEN 5: FORM 4 - GAYA HIDUP
 # =========================================================
 elif st.session_state.step == "form4":
-    render_progress(4, "Gaya Hidup")
+    render_progress(4, "Gaya Hidup & Kebiasaan")
 
     st.markdown("""
     <div class="form-card">
       <div class="section-eyebrow">Langkah Terakhir</div>
-      <h2>Gaya Hidup</h2>
-      <p class="section-desc">Kebiasaan ini membantu melengkapi gambaran risiko Anda secara menyeluruh.</p>
+      <h2>Pola Hidup & Kebiasaan Sehari-hari</h2>
+      <p class="section-desc">Kebiasaan konsumsi dan merokok memberikan gambaran menyeluruh terhadap paparan risiko kardio-metabolik Anda.</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -446,10 +452,10 @@ elif st.session_state.step == "form4":
     st.write("")
     c_nav1, c_nav2 = st.columns([1, 2])
     with c_nav1:
-        if st.button("Kembali", type="secondary", use_container_width=True):
+        if st.button("← Kembali", type="secondary", use_container_width=True):
             go_to("form3")
     with c_nav2:
-        if st.button("Lihat hasil saya", type="primary", use_container_width=True):
+        if st.button("Analisis Hasil Skrining AI →", type="primary", use_container_width=True):
             go_to("result")
 
 
@@ -544,19 +550,19 @@ elif st.session_state.step == "result":
     # Mode Screening (RF) sensitif mendeteksi risiko
     if xgb_prob >= 0.50 or rf_prob >= 0.65:
         badge_cls = "high"
-        badge_text = "Risiko Tinggi"
-        heading_text = "Ada beberapa hal yang perlu Anda perhatikan"
-        sub_text = "Berdasarkan data yang Anda masukkan, beberapa indikator klinis menunjukkan tanda risiko diabetes yang signifikan."
+        badge_text = "Tingkat Risiko Tinggi (Perlu Evaluasi Klinis)"
+        heading_text = "Indikator Menunjukkan Kecenderungan Risiko Signifikan"
+        sub_text = "Model mendeteksi kombinasi parameter klinis dan gaya hidup yang mengarah pada kemungkinan diabetes atau prediabetes lanjut. Disarankan melakukan pemeriksaan konfirmasi ke dokter."
     elif rf_prob >= 0.35 or xgb_prob >= 0.25:
         badge_cls = "moderate"
-        badge_text = "Risiko Sedang"
-        heading_text = "Ada beberapa faktor yang perlu diwaspadai"
-        sub_text = "Model skrining awal menangkap potensi indikasi risiko diabetes yang sebaiknya dievaluasi lebih lanjut."
+        badge_text = "Tingkat Risiko Sedang (Waspada Prediabetes)"
+        heading_text = "Terdapat Beberapa Faktor Risiko yang Perlu Diwaspadai"
+        sub_text = "Skrining awal mendeteksi adanya indikasi awal gangguan metabolisme glukosa. Penyesuaian pola hidup proaktif sangat dianjurkan untuk mencegah eskalasi risiko."
     else:
         badge_cls = "low"
-        badge_text = "Risiko Rendah"
-        heading_text = "Profil risiko Anda saat ini tergolong rendah"
-        sub_text = "Berdasarkan data yang Anda masukkan, indikator tubuh dan kebiasaan Anda berada dalam rentang yang aman."
+        badge_text = "Tingkat Risiko Rendah (Kondisi Terjaga)"
+        heading_text = "Profil Kesehatan Anda Saat Ini Berada di Rentang Aman"
+        sub_text = "Berdasarkan parameter klinis dan pola hidup yang dimasukkan, tidak ditemukan anomali risiko diabetes yang signifikan. Pertahankan pola hidup sehat ini."
 
     # 1. Result Badge Card
     st.markdown(f"""
@@ -570,23 +576,23 @@ elif st.session_state.step == "result":
     # 2. Dual-Model Estimation Card
     st.markdown(f"""
     <div class="dual-model-card">
-      <div style="font-size: 16px; font-weight: 700; color: #1D4E6B; margin-bottom: 14px; letter-spacing: 0.3px;">
-        ESTIMASI PROBABILITAS (DUAL-MODEL AI)
+      <div style="font-size: 17px; font-weight: 800; color: #123C54; margin-bottom: 14px; letter-spacing: 0.5px;">
+        ESTIMASI PROBABILITAS BERDASARKAN DUAL-MODEL AI
       </div>
       <div class="dual-model-box">
         <div class="mini-model-card">
-          <div class="mini-model-title">🩺 Random Forest</div>
-          <div class="mini-model-mode">Skrining Awal (Recall Tinggi)</div>
+          <div class="mini-model-title">🩺 Random Forest Classifier</div>
+          <div class="mini-model-mode">Mode Skrining Awal (Recall Tinggi / Sensitif)</div>
           <div class="mini-model-prob">{rf_prob:.1%}</div>
         </div>
         <div class="mini-model-card">
-          <div class="mini-model-title">⚖️ XGBoost</div>
-          <div class="mini-model-mode">Konfirmasi (Akurasi F1 Seimbang)</div>
+          <div class="mini-model-title">⚖️ XGBoost Classifier</div>
+          <div class="mini-model-mode">Mode Konfirmasi Diagnostik (F1-Score Seimbang)</div>
           <div class="mini-model-prob">{xgb_prob:.1%}</div>
         </div>
       </div>
-      <div style="font-size: 14.5px; color: #52667A; line-height: 1.6;">
-        <b>Catatan:</b> Random Forest difokuskan untuk menangkap risiko secara sensitif (meminimalkan risiko yang terlewat), sedangkan XGBoost memberikan kepastian pola diagnosis yang seimbang.
+      <div style="font-size: 15.5px; color: #475569; line-height: 1.6;">
+        <b>Penjelasan Arsitektur:</b> Model <i>Random Forest</i> dirancang peka untuk meminimalkan risiko negatif palsu (pasien berisiko yang tidak terdeteksi), sementara model <i>XGBoost</i> memberikan estimasi dengan presisi dan konfirmasi diagnostik yang seimbang.
       </div>
     </div>
     """, unsafe_allow_html=True)
@@ -658,54 +664,54 @@ elif st.session_state.step == "result":
     # 4. Rekomendasi Medis
     st.markdown("""
     <div class="reco-card">
-      <h3>Yang bisa Anda lakukan</h3>
+      <h3>Langkah Tindak Lanjut & Rekomendasi</h3>
       <div class="reco-item">
         <div class="reco-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A7E6F" stroke-width="2">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#236B5E" stroke-width="2.2">
             <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
           </svg>
         </div>
         <div class="reco-text">
-          <b>Periksa kadar HbA1C & Glukosa secara berkala</b>
-          <span>Pemeriksaan laboratorium berkala membantu memantau perubahan kadar gula darah sejak dini.</span>
+          <b>Pemeriksaan Laboratorium Berkala (HbA1C & Glukosa Puasa)</b>
+          <span>Melakukan evaluasi berkala di laboratorium klinik untuk memantau tren glikemik secara akurat dan objektif.</span>
         </div>
       </div>
       <div class="reco-item">
         <div class="reco-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A7E6F" stroke-width="2">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#236B5E" stroke-width="2.2">
             <circle cx="12" cy="12" r="9"/>
             <path d="M12 7v5l3 3"/>
           </svg>
         </div>
         <div class="reco-text">
-          <b>Jaga berat badan & aktivitas fisik rutin</b>
-          <span>Latihan aerobik sedang (jalan cepat 30 menit/hari) efektif meningkatkan sensitivitas insulin.</span>
+          <b>Manajemen Berat Badan & Aktivitas Fisik Terstruktur</b>
+          <span>Kombinasikan latihan kardio intensitas sedang (150 menit/minggu) dan latihan beban untuk mengoptimalkan sensitivitas reseptor insulin.</span>
         </div>
       </div>
       <div class="reco-item">
         <div class="reco-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A7E6F" stroke-width="2">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#236B5E" stroke-width="2.2">
             <path d="M12 3a6 6 0 00-6 6c0 4 3 5 3 9h6c0-4 3-5 3-9a6 6 0 00-6-6z"/>
           </svg>
         </div>
         <div class="reco-text">
-          <b>Perhatikan pola makan sehat & gizi seimbang</b>
-          <span>Batasi konsumsi karbohidrat olahan dan perbanyak asupan serat dari sayur-sayuran hijau.</span>
+          <b>Pola Makan Rendah Indeks Glikemik & Manajemen Stres</b>
+          <span>Kurangi karbohidrat sederhana, tingkatkan serat harian, dan pertahankan waktu tidur yang cukup untuk menjaga kestabilan hormon kortisol.</span>
         </div>
       </div>
     </div>
     """, unsafe_allow_html=True)
 
     # 5. Tombol Aksi (CTA)
-    if st.button("Cek ulang dengan data lain", type="secondary", use_container_width=True):
+    if st.button("↺ Mulai Pemeriksaan Baru dengan Data Lain", type="secondary", use_container_width=True):
         go_to("landing")
 
     # 6. Accordion Metodologi Penilaian
     st.markdown("""
     <details class="methodology">
-      <summary>Lihat metodologi penilaian ↓</summary>
+      <summary>Pelajari Metodologi Penilaian & Transparansi Model AI ↓</summary>
       <div class="methodology-body">
-        Hasil ini dihasilkan melalui dua tahap analisis Machine Learning: <b>Random Forest Tuned</b> untuk skrining awal yang peka mengidentifikasi potensi risiko (Recall tinggi), dan <b>XGBoost Tuned</b> untuk memperkuat ketepatan diagnosis (F1-score 0.7855 & ROC-AUC 0.956). Model dilatih menggunakan dataset kesehatan populasi NHANES berskala besar. Hasil ini tidak menggantikan pemeriksaan langsung oleh dokter.
+        Hasil skrining ini diproses melalui pipeline inferensi <i>Machine Learning</i> ganda: <b>Random Forest Tuned</b> dioptimalkan untuk mendeteksi potensi risiko awal secara sensitif (<i>High Recall</i>), dan <b>XGBoost Tuned</b> digunakan untuk mengonfirmasi pola klasifikasi diagnostik dengan akurasi terkalibrasi (F1-score 0.7855 & ROC-AUC 0.956). Model dilatih menggunakan dataset riil berskala besar <i>National Health and Nutrition Examination Survey (NHANES)</i>. Hasil ini bersifat sebagai panduan pendukung keputusan dan tidak menggantikan konsultasi langsung dengan dokter.
       </div>
     </details>
     """, unsafe_allow_html=True)
