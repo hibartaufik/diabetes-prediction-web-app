@@ -10,7 +10,6 @@ Desain dan alur UX diadaptasi 1:1 dari prototipe klinis (diabetes-risk-prototype
 
 from pathlib import Path
 import streamlit as st
-from streamlit_extras.stylable_container import stylable_container
 import pandas as pd
 from utils.preprocessing import preprocess_input, load_artifacts, calculate_map
 
