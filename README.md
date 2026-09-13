@@ -6,6 +6,7 @@
 [![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat&logo=scikitlearn&logoColor=white)](https://scikit-learn.org)
 [![XGBoost](https://img.shields.io/badge/XGBoost-00758F?style=flat)](https://xgboost.ai)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Try%20Now-4CAF50?style=flat)](https://predict-your-diabet.streamlit.app/)
 
 ---
 
