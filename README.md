@@ -295,15 +295,6 @@ For major changes, please open an issue first to discuss proposed modifications.
 
 ---
 
-## 📄 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
-### Model Artifacts & Attribution
-The trained model files (`clf_rf.pkl`, `clf_xgb.pkl`, `scaler.pkl`) are provided for demonstration purposes. If you use these models in your own work, please cite this repository and acknowledge the NHANES dataset as the data source.
-
----
-
 ## 👤 Author
 
 **Your Name**  
