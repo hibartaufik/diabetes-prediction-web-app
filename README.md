@@ -69,7 +69,7 @@ Result Visualization (Streamlit UI)
 | **Random Forest (Tuned)** | 0.8124 | 0.7201 | 0.8891 | 0.7961 | 0.957 |
 | **XGBoost (Tuned)** | 0.8219 | 0.7512 | 0.8231 | **0.7855** | **0.956** |
 
-*Training dataset: NHANES 2015-2018 (n=5,635 after preprocessing)*
+*Training dataset: NHANES 2021-2023 (n=5,635 after preprocessing)*
 
 ### Tech Stack
 - **Frontend**: Streamlit (multi-page wizard, responsive layout)
